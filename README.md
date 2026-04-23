@@ -21,3 +21,8 @@ Managed node:
 Server chạy CentOS 8/9 hoặc Rocky Linux 8/9, có Python 3, cho phép SSH bằng root (lab sử dụng sshkey)
 Ansible Vault:
 Dùng để mã hóa mật khẩu user
+
+Cài đặt
+Clone repository này:
+git clone https://github.com/yourusername/ansible-home-lab.git
+cd ansible-home-lab
