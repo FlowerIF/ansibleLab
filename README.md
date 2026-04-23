@@ -24,5 +24,5 @@ Dùng để mã hóa mật khẩu user
 
 Cài đặt
 Clone repository này:
-git clone https://github.com/FlowerIF/ansible-home-lab.git
+git clone https://github.com/FlowerIF/ansibleLab.git
 cd ansible-home-lab
