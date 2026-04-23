@@ -35,30 +35,37 @@ Vault password: <xx>
 PLAY [create centos with storage, user and cron] *******************************
 
 TASK [Gathering Facts] *********************************************************
+
 ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 TASK [create part /dev/loop0] **************************************************
+
 changed: [192.168.75.129]
 changed: [192.168.75.128]
 
 TASK [create PV] ***************************************************************
+
 changed: [192.168.75.129]
 changed: [192.168.75.128]
 
 TASK [create LV 256M] **********************************************************
+
 changed: [192.168.75.129]
 changed: [192.168.75.128]
 
 TASK [format lv xfs] ***********************************************************
+
 changed: [192.168.75.129]
 changed: [192.168.75.128]
 
 TASK [create mount dir] ********************************************************
+
 ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 TASK [mount lv to dir] *********************************************************
+
 [WARNING]: The value 0 (type int) in a string field was converted to '0' (type
 string). If this does not look like what you expect, quote the entire value to
 ensure it does not change.
@@ -66,18 +73,22 @@ changed: [192.168.75.129]
 changed: [192.168.75.128]
 
 TASK [create admin group] ******************************************************
+
 ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 TASK [create auto user with pass form vault] ***********************************
+
 ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 TASK [add admin group password less sudo] **************************************
+
 ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 TASK [add cron job auto delete logs at 2am] ************************************
+
 [WARNING]: The value 2 (type int) in a string field was converted to '2' (type
 string). If this does not look like what you expect, quote the entire value to
 ensure it does not change.
