@@ -96,6 +96,7 @@ ok: [192.168.75.129]
 ok: [192.168.75.128]
 
 PLAY RECAP *********************************************************************
+
 192.168.75.128             : ok=11   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 192.168.75.129             : ok=11   changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
