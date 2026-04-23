@@ -1,0 +1,4 @@
+[webhosts]
+192.168.75.128
+192.168.75.129 ansible_user=test
+

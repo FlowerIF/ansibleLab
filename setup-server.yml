@@ -1,0 +1,81 @@
+---
+- name: create centos with storage, user and cron
+  hosts: webhosts
+  become: true
+  vars_files:
+    - user_pass.yml
+  tasks:
+      ###  tao cac part, physical volume, volume group, logical volume
+      ###  sau do tao thu muc de gan vao logical volume
+    - name: create part /dev/loop0 
+      parted:
+        device: /dev/loop0
+        number: 1
+        state: present
+        part_end: 100%
+      when: ansible_devices.loop0 is defined 
+    - name: create PV
+      lvg:
+        vg: vg_data
+        pvs: /dev/loop0
+        state: present
+    - name: create LV 256M
+      lvol:
+        vg: vg_data
+        lv: lv_data
+        size: 256m
+        state: present
+    - name: format lv xfs
+      filesystem:
+        fstype: xfs
+        dev: /dev/vg_data/lv_data
+
+
+    - name: create mount dir
+      file:
+        path: /opt/app
+        state: directory
+        mode: 0755
+    - name: mount lv to dir
+      mount:
+        path: /opt/app
+        src: /dev/vg_data/lv_data
+        fstype: xfs
+        state: mounted
+        dump: 0
+        passno: 0
+
+
+    ### tao user voi pass vault, cho phep group thi hanh voi quyen sudo
+    - name: create admin group
+      group:
+        name: admin
+        state: present
+    - name: create auto user with pass form vault
+      user:
+        name: autouser
+        groups: admin
+        password: "{{ auto_user_pass  }}"
+        shell: /bin/bash
+        state: present
+
+    - name: add admin group password less sudo
+      lineinfile:
+        path: /etc/sudoer.d/admin
+        line: "%admin ALL=(ALL) NOPASSWD: ALL"
+        create: yes
+        mode: 0440
+        validate: '/usr/sbin/visudo -cf %s'
+
+    ### tao cron job xoa logs ngay vao 2h sang
+    - name: add cron job auto delete logs at 2am
+      cron:
+        name: rotate logs
+        minute: 0
+        hour: 2
+        user: root
+        job: '/usr/sbin/logrotate -f /etc/logrotate.d/app'
+        cron_file: rotate_app
+        state: present
+
+
